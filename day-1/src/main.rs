@@ -1,5 +1,6 @@
 use std::env;
 use std::fs;
+use std::time::Instant;
 
 fn main() {
     // --snip--
@@ -9,6 +10,7 @@ fn main() {
 
     println!("Opening file {}", filename);
 
+    let start = Instant::now();
     let contents = fs::read_to_string(filename)
         .expect("Something went wrong reading the file");
 
@@ -22,9 +24,12 @@ fn main() {
             for (k, right) in numbers[j..].iter().enumerate() {
                 let sum = left + mid + right;
                 if sum == 2020 {
+                    let duration = start.elapsed();
+                    println!("Finished after {:?}", duration);
                     println!("left[{}] * mid[{}] * right[{}] = {}", i, j, k, left * mid * right);
                 }
             }
         }
     }
 }
+
