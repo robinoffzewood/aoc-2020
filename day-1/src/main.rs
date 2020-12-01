@@ -18,10 +18,12 @@ fn main() {
         .collect();
 
     for (i, left) in numbers.iter().enumerate() {
-        for (j, right) in numbers[i..].iter().enumerate() {
-            let sum = left + right;
-            if sum == 2020 {
-                println!("left[{}] * right[{}] = {}", i, j, left * right);
+        for (j, mid) in numbers[i..].iter().enumerate() {
+            for (k, right) in numbers[j..].iter().enumerate() {
+                let sum = left + mid + right;
+                if sum == 2020 {
+                    println!("left[{}] * mid[{}] * right[{}] = {}", i, j, k, left * mid * right);
+                }
             }
         }
     }
