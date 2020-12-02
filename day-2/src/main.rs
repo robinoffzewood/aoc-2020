@@ -57,8 +57,8 @@ impl PwdValidator {
     }
 
     fn _is_valid_new_pol(&self) -> bool {
-        let l_char = self.password.get(self.policy.left-1..self.policy.left).unwrap();
-        let r_char = self.password.get(self.policy.right - 1..self.policy.right).unwrap();
+        let l_char = self.password.chars().nth(self.policy.left - 1).unwrap();
+        let r_char = self.password.chars().nth(self.policy.right - 1).unwrap();
 
         let is_left_ok : bool = l_char.to_string() == self.policy.letter;
         let is_right_ok : bool = r_char.to_string() == self.policy.letter;
@@ -80,10 +80,10 @@ fn main() {
         let password_old_pol = PwdValidator::create_policy(PwdPolicyKind::Old, policy_pwd[0].to_string(), policy_pwd[1].trim_start().to_string());
         let password_new_pol = PwdValidator::create_policy(PwdPolicyKind::New, policy_pwd[0].to_string(), policy_pwd[1].trim_start().to_string());
         //println!{"{:?}", password};
-        if password_old_pol.is_valid() == true {
+        if password_old_pol.is_valid() {
             old_pol_valid_cnt += 1;
         }
-        if password_new_pol.is_valid() == true {
+        if password_new_pol.is_valid() {
             new_pol_valid_cnt += 1;
         }
     }
