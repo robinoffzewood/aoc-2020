@@ -57,6 +57,11 @@ impl Slope {
         }
     }
 
+    fn reset (&mut self) {
+        self.santa = Xy {x:0, y:0};
+        self.trees_hit = 0;
+    }
+
 }
 
 fn main() {
@@ -68,4 +73,16 @@ fn main() {
     let mut tobogan = Slope::from_lines(&contents);
     tobogan.descend();
     println!{"Outch! hit {} trees!", tobogan.trees_hit};
+
+    tobogan.reset();
+    let slopes = vec![Xy{x:1, y:1}, Xy{x:3, y:1}, Xy{x:5, y:1}, Xy{x:7, y:1}, Xy{x:1, y:2}];
+    let mut result : i64 = 1;
+    for s in slopes {
+        tobogan.delta = s;
+        tobogan.descend();
+        result = result * tobogan.trees_hit as i64;
+        tobogan.reset();
+    }
+    println!{"multiplied together = {} trees!", result};
+
 }
