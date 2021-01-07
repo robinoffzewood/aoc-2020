@@ -137,7 +137,7 @@ impl FoodList {
         canonical_list.strip_suffix(",").unwrap().to_string()
     }
 
-    fn from_file(f_name: &str) -> FoodList {
+    fn from_file(f_name: &str) -> Self {
         let mut food = Vec::new();
         let str_in = fs::read_to_string(f_name).expect("Error in reading file");
         let food_list: Vec<&str> = str_in.split("\r\n").collect();
